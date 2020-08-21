@@ -1,0 +1,365 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+ class DersKayit{
+	class kayit{
+		
+	    String name,surname,number,vize,finaln;
+	}
+	class hesaplama{
+		double basarinotu;
+		String harfnotu;
+		
+	}
+	class Raporlama{
+		
+	}
+ }
+
+public class kayitolustur {
+
+	public kayitolustur() {
+		// TODO Auto-generated constructor stub
+	}
+	 
+	public static void main(String[] args) {
+		DersKayit d1 = new DersKayit();
+		DersKayit.kayit u1=d1.new kayit();
+		DersKayit.hesaplama h1 = d1.new hesaplama();
+		
+		System.out.println("1)Kayıt işlemleri , 2) Raporlama işlemleri ");
+		Scanner scan = new Scanner(System.in);
+		
+		int secim = scan.nextInt();
+		switch(secim) {
+		
+		case 1:
+			Scanner scannumber = new Scanner(System.in);
+			System.out.println("Öğrenci numarasını giriniz");
+			u1.number = scannumber.nextLine();
+			
+			
+			Scanner scanname = new Scanner(System.in);
+			System.out.println("Öğrenci adı  giriniz");
+			u1.name = scanname.nextLine();
+			
+			
+			Scanner scansurname = new Scanner(System.in);
+			System.out.println("Öğrenci soyadı  giriniz");
+			u1.surname = scansurname.nextLine();
+			
+			Scanner scanvize = new Scanner(System.in);
+			System.out.println("Öğrenci Vize notunu giriniz");
+			u1.vize = scanvize.nextLine();
+			
+			Scanner scanfinal = new Scanner(System.in);
+			System.out.println("Öğrenci final notunu giriniz");
+			u1.finaln = scanfinal.nextLine();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			
+			try {
+				File f = new File("C:\\Users\\asus\\Desktop\\vize\\kayit.txt");
+				FileWriter filewriter = new  FileWriter(f,true);
+				
+				filewriter.write(u1.number+"-"+u1.name+"-"+u1.surname+"-"+u1.vize+"-"+u1.finaln+"-"+"\n");
+				filewriter.close();
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		
+			int vize1 = Integer.valueOf(u1.vize);
+			int final1 = Integer.valueOf(u1.finaln);
+			
+			h1.basarinotu = vize1*0.40+final1*0.60;
+			if(h1.basarinotu<=100 && h1.basarinotu>75) {
+				h1.harfnotu = "A";		
+				System.out.println("Öğrenci Başarı Harf Notu 'A'");
+			}
+			else if(h1.basarinotu<=75 && h1.basarinotu>50) {
+				h1.harfnotu="B";
+				System.out.println("Öğrenci Başarı Harf Notu 'B'");
+			}
+			else if(h1.basarinotu<=50 && h1.basarinotu>25) {
+				h1.harfnotu="C";
+				System.out.println("Öğrenci Başarı Harf Notu 'C'");
+			}
+			else if(h1.basarinotu<=25 && h1.basarinotu>0) {
+				h1.harfnotu="D";
+				System.out.println("Öğrenci Başarı Harf Notu 'D'");
+			}
+			else {
+				System.out.println("Geçerli bir not değildir");
+				}
+			
+			
+		
+			
+			
+			try {
+				File f = new File("C:\\Users\\asus\\Desktop\\vize\\rapor.txt");
+				FileWriter filewriter = new  FileWriter(f,true);
+				
+				filewriter.write(u1.number+"-"+u1.name+"-"+u1.surname+"-"+u1.vize+"-"+u1.finaln+"-"+h1.basarinotu+"-"+
+				h1.harfnotu+"\n");
+				filewriter.close();
+				
+				
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			
+			
+			
+			break;
+			
+		case 2:
+			File f = new File("C:\\Users\\asus\\Desktop\\vize\\raporgercek.txt");
+			try {
+			
+				FileReader fr = new FileReader("C:\\Users\\asus\\Desktop\\vize\\rapor.txt");
+				BufferedReader br = new BufferedReader(fr);
+				String str;
+				 int lineNumber = 0;
+				 int vizeort = 0;
+				 int finalort = 0;
+				 Float basort=(float) 0.0;
+				 Float endusuk = (float) 101.0,enyuksek = (float) 0.0;
+				 String enbasogrno = null;
+				 String enbasograd = null;
+				 String enbasogrsoyad = null;
+				 String enbasogrvize = null;
+				 String enbasogrfinal = null;
+				 String enbasogrbasnot = null;
+				 
+				 
+				 String endusogrno = null;
+				 String endusograd = null;
+				 String endusogrsoyad = null;
+				 String endusogrvize = null;
+				 String endusogrfinal = null;
+				 String endusogrbasnot = null;
+				 
+				 int a = 0,b=0, c=0, d= 0;
+				 
+				 
+				
+				
+			 str = br.readLine();
+			 while(str !=null) {
+				 if(str.length()>0){
+		               lineNumber++;
+				 }
+				 
+				 
+				 
+
+					 String[] parts = str.split("-");
+					 String part1 = parts[0]; // 004
+					 String part2 = parts[1];
+					 String part3 = parts[2];
+					 String part4 = parts[3];
+					 String part5 = parts[4];
+					 String part6 = parts[5];
+					 String part7 = parts[6];
+					
+				 
+				 
+				 int vizetoplam = Integer.valueOf(part4);
+				 int finaltoplam = Integer.valueOf(part5);
+				 Float bastoplam = Float.valueOf(part6);
+				 
+				 vizeort = vizeort+ vizetoplam;
+				 finalort = finalort+finaltoplam;
+				 basort = basort+bastoplam;
+
+
+				 if(bastoplam >enyuksek) {
+					 enyuksek = bastoplam;
+					  enbasogrno = part1;
+					  enbasograd = part2;
+					  enbasogrsoyad = part3;
+					  enbasogrvize = part4;
+					  enbasogrfinal = part5;
+					  enbasogrbasnot = part6;
+					 
+					 
+				 }
+				 if(bastoplam<endusuk) {
+					 endusuk = bastoplam;
+					 endusogrno = part1;
+					  endusograd = part2;
+					  endusogrsoyad = part3;
+					  endusogrvize = part4;
+					 endusogrfinal = part5;
+					  endusogrbasnot = part6;
+					 
+					 
+				 }
+				 
+				 
+				 
+				 for (int i=0; i < part7.length(); i++)
+			     {    if(part7.charAt(i) == 'A')
+			    	 a++;
+			     }
+				 
+				
+				 for (int i=0; i < part7.length(); i++)
+			     {    if(part7.charAt(i) == 'B')
+			    	 b++;
+			     }
+				 
+				 for (int i=0; i < part7.length(); i++)
+			     {    if(part7.charAt(i) == 'C')
+			    	 c++;
+			     }
+				 for (int i=0; i < part7.length(); i++)
+			     {    if(part7.charAt(i) == 'D')
+			    	 d++;
+			     }
+				 
+				 
+				 FileWriter wr = new  FileWriter(f,true);
+					
+					wr.write(part1+"-"+part2+"-"+part3+"-"+part4+"-"+part5+"-"+part6+"-"+
+					part7+"\n");
+					wr.close();
+					
+					
+					
+				 
+				
+				 
+				 
+				
+				 
+				
+				 
+				 str = br.readLine();
+				
+				 
+			 }
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 br.close();
+			 
+			 vizeort= vizeort/lineNumber;
+			 System.out.println("Vize ortalama: "+vizeort);
+			 finalort = finalort/lineNumber;
+			 System.out.println("Final ortalama: "+finalort);
+			 basort = basort/lineNumber ;
+			 System.out.println("Başarı ortalama: "+basort);
+			 
+			 System.out.println("en başarılı öğrenci :" + enyuksek+" öğrenci no : "+ enbasogrno+" ad: "+enbasograd+" soyad: "+enbasogrsoyad+" vize notu: "+ enbasogrvize+" final notu: "+enbasogrfinal+" başarı notu: "+ enbasogrbasnot);
+			 
+			 System.out.println("en başarısız :" + endusuk+" öğrenci no : "+ endusogrno+
+					 " ad: "+endusograd+" soyad: "+endusogrsoyad+" vize notu: "+ endusogrvize+" final notu: "+endusogrfinal+" başarı notu: "+ endusogrbasnot);
+			 
+			 System.out.println("A:"+a + " B:"+ b+" C:"+c+" D:"+d );
+			 
+			 
+			 System.out.println("Verilen Dökümandaki Öğrenci Sayısı: "+lineNumber);
+			 
+			 FileWriter filewriter = new  FileWriter(f,true);
+				
+				filewriter.write("Vize ort:"+vizeort+"\n");
+				filewriter.write("Final ort:"+finalort+"\n");
+				filewriter.write("başarıort:"+basort+"\n");
+				filewriter.write("en başarılı öğrenci :" + enyuksek+" öğrenci no : "+ enbasogrno+" ad: "+enbasograd+" soyad: "+enbasogrsoyad+" vize notu: "+ enbasogrvize+" final notu: "+enbasogrfinal+" başarı notu: "+ enbasogrbasnot+"\n");
+				filewriter.write("en başarısız :" + endusuk+" öğrenci no : "+ endusogrno+
+					 " ad: "+endusograd+" soyad: "+endusogrsoyad+" vize notu: "+ endusogrvize+" final notu: "+endusogrfinal+" başarı notu: "+ endusogrbasnot+"\n");
+				filewriter.write("A:"+a + " B:"+ b+" C:"+c+" D:"+d +"\n");
+				
+				filewriter.close();
+			 
+			 
+			 
+			 
+				
+			 
+				
+			
+			  
+			  
+			  
+			  
+				
+				
+				
+				
+				
+				
+				
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			break;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	
+	}
+
+}
